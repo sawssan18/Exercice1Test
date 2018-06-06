@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebAppFlight.Models.FlightViewModel>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightDeparture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightArrival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureAirportName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalAirportName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AircraftName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AirlineName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FlightDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuelConsumption)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightDeparture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightArrival)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureAirportName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalAirportName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AircraftName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AirlineName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightDistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FuelConsumption)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+    <a class="btn btn-info" asp-action="Index">Back to List</a>

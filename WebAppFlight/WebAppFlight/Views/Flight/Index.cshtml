@@ -1,0 +1,111 @@
+﻿@model WebAppFlight.Models.FlightViewModel
+
+<div class="container" style="margin-top:3%">
+
+    <a href="#" class="btn btn-info" id="AddFlightRecord">Add New Flight</a> <br /><br />
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.FlightId)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.FlightDeparture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FlightArrival)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartureAirportName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArrivalAirportName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AirlineName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AircraftName)
+                </th>
+            </tr>
+        </thead>
+        <tbody id="SetFlightList">
+            <tr id="LoadingStatus" style="color:red"></tr>
+        </tbody>
+    </table>
+    <a class="btn btn-info" asp-action="Report">Report</a>
+
+    @*Create A Popup Modal With Registration Form For Add Or Edit Flight Record*@
+
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h4 id="ModalTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <fieldset id="SubmitForm">
+                            @Html.HiddenFor(m => m.FlightId, new { @id = "FlyId" })
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.FlightDeparture, new { @id = "FlyDep", @class = "form-control", @placeholder = " Departure Date*" })
+                                @Html.ValidationMessageFor(m => m.FlightDeparture)
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.FlightArrival, new { @id = "FlyArri", @class = "form-control", @placeholder = "Arrival date*" })
+                                @Html.ValidationMessageFor(m => m.FlightArrival)
+                            </div>
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.DepartureId, @ViewData["ListAirport"] as SelectList, "--Select DeptAirport--", new { @id = "DropDwnDep", @class = "form-control" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.ArrivalId, @ViewData["ListAirport"] as SelectList, "--Select ArrAirport--", new { @id = "DropDwnArr", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.AirlineId, @ViewData["ListOfAirline"] as SelectList, "--Select Company--", new { @id = "DropDwnLst", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.AircraftId, @ViewData["ListOfAircraft"] as SelectList, "--Select Aircraft--", new { @id = "DropDwnCraft", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <a href="#" class="btn btn-block btn-danger" id="SaveFlightRecord">Save</a>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Create A PopUp Modal For DeleteConfirmation*@
+    <div class="modal fade" id="DeleteConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h4>Delete Flight Record</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Are You Sure? You Want To Delete This Record.</h4>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" data-dismiss="modal" id="r">Cancel</a>
+                    <a href="#" class="btn btn-danger" onclick="ConfirmDelete()">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+    {
+
+    <script src="~/js/flight.js" asp-append-version="true"></script>
+    }
+
